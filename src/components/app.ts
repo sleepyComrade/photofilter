@@ -1,13 +1,11 @@
 import { Wrap } from "./wrap";
 import { Img } from "./img";
-import { SliderWrap } from "./slider-wrap";
-import { SliderName } from "./slider-name";
-import { Slider } from "./slider";
 import { ResetButton } from "./reset-button";
 import { UploadSender } from "./upload-sender";
 import { UploadButton } from "./upload-button";
 import { DownloadButton } from "./download-button";
 import { FilteredImage } from "./filtered-image";
+import { SlidersWrap } from "./sliders-wrap";
 
 export class App extends Wrap {
   constructor(parent:HTMLElement, className: string) {
@@ -15,34 +13,7 @@ export class App extends Wrap {
     const settingWrap = new Wrap(this.el, 'setting-wrap');
     const settingLayout = new Wrap(settingWrap.el, 'setting-disabled');
 
-    const blurSliderWrap = new SliderWrap(settingWrap.el);
-    const blurSliderName = new SliderName(blurSliderWrap.el, 'Blur');
-    const blurSlider = new Slider(blurSliderWrap.el, '0', '100');
-
-    const hueSliderWrap = new SliderWrap(settingWrap.el)
-    const hueSliderName = new SliderName(hueSliderWrap.el, 'Hue');
-    const hueSlider = new Slider(hueSliderWrap.el, '0', '360');
-
-    const contrastSliderWrap = new SliderWrap(settingWrap.el);
-    const contrastSliderName = new SliderName(contrastSliderWrap.el, 'Contrast');
-    const contrastSlider = new Slider(contrastSliderWrap.el, '100', '200');
-
-    const grayscaleSliderWrap = new SliderWrap(settingWrap.el);
-    const grayscaleSliderName = new SliderName(grayscaleSliderWrap.el, 'Grayscale');
-    const grayscaleSlider = new Slider(grayscaleSliderWrap.el, '0', '100');
-
-    const invertSliderWrap = new SliderWrap(settingWrap.el);
-    const invertSliderName = new SliderName(invertSliderWrap.el, 'Invert');
-    const invertSlider = new Slider(invertSliderWrap.el, '0', '100');
-
-    const brightnessSliderWrap = new SliderWrap(settingWrap.el);
-    const brightnessSliderName = new SliderName(brightnessSliderWrap.el, 'Brightness');
-    const brightnessSlider = new Slider(brightnessSliderWrap.el, '100', '200');
-
-    const saturateSliderWrap = new SliderWrap(settingWrap.el);
-    const saturateSliderName = new SliderName(saturateSliderWrap.el, 'Saturate');
-    const saturateSlider = new Slider(saturateSliderWrap.el, '100', '200');
-
+    const slidersWrap = new SlidersWrap(settingWrap.el)
     const resetButton = new ResetButton(settingWrap.el, 'Reset to default');
     
     const imageAreaWrap = new Wrap(this.el, 'image-area-wrap');
@@ -53,48 +24,42 @@ export class App extends Wrap {
     const image = new Img(imageAreaWrap.el);
     
     resetButton.resetFilter = () => {
-      blurSlider.resetValue();
-      hueSlider.resetValue();
-      contrastSlider.resetValue();
-      grayscaleSlider.resetValue();
-      invertSlider.resetValue();
-      brightnessSlider.resetValue();
-      saturateSlider.resetValue();
+      slidersWrap.resetValues();
       image.resetFilter();
       image.setFilter();
     }
 
-    blurSlider.onInput = (num) => {
+    slidersWrap.blurSlider.onInput = (num) => {
       image.setBlur(num);
       image.setFilter();
     }
 
-    hueSlider.onInput = (num) => {
+    slidersWrap.hueSlider.onInput = (num) => {
       image.setHue(num);
       image.setFilter();
     }
 
-    contrastSlider.onInput = (num) => {
+    slidersWrap.contrastSlider.onInput = (num) => {
       image.setContrast(num);
       image.setFilter();
     }
 
-    grayscaleSlider.onInput = (num) => {
+    slidersWrap.grayscaleSlider.onInput = (num) => {
       image.setGrayscale(num);
       image.setFilter();
     }
 
-    invertSlider.onInput = (num) => {
+    slidersWrap.invertSlider.onInput = (num) => {
       image.setInvert(num);
       image.setFilter();
     }
 
-    brightnessSlider.onInput = (num) => {
+    slidersWrap.brightnessSlider.onInput = (num) => {
       image.setBrightness(num);
       image.setFilter();
     }
 
-    saturateSlider.onInput = (num) => {
+    slidersWrap.saturateSlider.onInput = (num) => {
       image.setSaturate(num);
       image.setFilter();
     }

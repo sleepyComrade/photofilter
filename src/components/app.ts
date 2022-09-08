@@ -29,38 +29,8 @@ export class App extends Wrap {
       image.setFilter();
     }
 
-    slidersWrap.blurSlider.onInput = (num) => {
-      image.setBlur(num);
-      image.setFilter();
-    }
-
-    slidersWrap.hueSlider.onInput = (num) => {
-      image.setHue(num);
-      image.setFilter();
-    }
-
-    slidersWrap.contrastSlider.onInput = (num) => {
-      image.setContrast(num);
-      image.setFilter();
-    }
-
-    slidersWrap.grayscaleSlider.onInput = (num) => {
-      image.setGrayscale(num);
-      image.setFilter();
-    }
-
-    slidersWrap.invertSlider.onInput = (num) => {
-      image.setInvert(num);
-      image.setFilter();
-    }
-
-    slidersWrap.brightnessSlider.onInput = (num) => {
-      image.setBrightness(num);
-      image.setFilter();
-    }
-
-    slidersWrap.saturateSlider.onInput = (num) => {
-      image.setSaturate(num);
+    slidersWrap.onInputs = (values, contents) => {
+      image.setValues(values, contents);
       image.setFilter();
     }
 

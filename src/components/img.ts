@@ -34,31 +34,60 @@ export class Img {
     return this.el.style.filter;
   }
 
-  setContrast(value: number) {
-    this.contrastValue = `contrast(${value}%)`;
+  setValues(value: number, property: string) {
+    switch (property) {
+      case 'Blur':
+      this.blurValue = `blur(${value / 10}px)`;
+        break;
+      case 'Hue':
+      this.hueValue = `hue-rotate(${value}deg)`;
+        break;
+        case 'Contrast':
+        this.contrastValue = `contrast(${value}%)`;
+      break;
+      case 'Grayscale':
+      this.grayscaleValue = `grayscale(${value}%)`;
+      break;
+      case 'Invert':
+      this.invertValue = `invert(${value}%)`;
+      break;
+      case 'Brightness':
+      this.brightnessValue = `brightness(${value}%)`;
+      break;
+      case 'Saturate':
+      this.saturateValue = `saturate(${value}%)`;
+      break;
+      default:
+        return;
+        break;
+    }
   }
 
-  setHue(value: number) {
-    this.hueValue = `hue-rotate(${value}deg)`;
-  }
+  // setContrast(value: number) {
+  //   this.contrastValue = `contrast(${value}%)`;
+  // }
 
-  setBlur(value: number) {
-    this.blurValue = `blur(${value / 10}px)`;
-  }
+  // setHue(value: number) {
+  //   this.hueValue = `hue-rotate(${value}deg)`;
+  // }
 
-  setGrayscale(value: number) {
-    this.grayscaleValue = `grayscale(${value}%)`;
-  }
+  // setBlur(value: number) {
+  //   this.blurValue = `blur(${value / 10}px)`;
+  // }
 
-  setInvert(value: number) {
-    this.invertValue = `invert(${value}%)`;
-  }
+  // setGrayscale(value: number) {
+  //   this.grayscaleValue = `grayscale(${value}%)`;
+  // }
 
-  setBrightness(value: number) {
-    this.brightnessValue = `brightness(${value}%)`;
-  }
+  // setInvert(value: number) {
+  //   this.invertValue = `invert(${value}%)`;
+  // }
 
-  setSaturate(value: number) {
-    this.saturateValue = `saturate(${value}%)`;
-  }
+  // setBrightness(value: number) {
+  //   this.brightnessValue = `brightness(${value}%)`;
+  // }
+
+  // setSaturate(value: number) {
+  //   this.saturateValue = `saturate(${value}%)`;
+  // }
 }

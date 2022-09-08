@@ -9,6 +9,7 @@ export class SlidersWrap {
   invertSlider
   brightnessSlider
   saturateSlider
+  onInputs: (values: number, contents: string) => void;
   constructor(parent: HTMLElement) {
     this.el = document.createElement('div');
     this.el.className = 'sliders-wrap';
@@ -21,6 +22,7 @@ export class SlidersWrap {
     this.invertSlider = new SliderItem(this.el, 'Invert', '0', '100');
     this.brightnessSlider = new SliderItem(this.el, 'Brightness', '100', '200');
     this.saturateSlider = new SliderItem(this.el, 'Saturate', '100', '200');
+    this.transmitValue();
   }
 
   resetValues () {
@@ -31,5 +33,29 @@ export class SlidersWrap {
     this.invertSlider.resetValue();
     this.brightnessSlider.resetValue();
     this.saturateSlider.resetValue();
+  }
+
+  transmitValue () {
+    this.blurSlider.onInput = (value, content) => {
+        this.onInputs(value, content);
+    }
+    this.hueSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
+    this.contrastSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
+    this.grayscaleSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
+    this.invertSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
+    this.brightnessSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
+    this.saturateSlider.onInput = (value, content) => {
+      this.onInputs(value, content);
+    }
   }
 }

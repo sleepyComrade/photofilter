@@ -6,6 +6,17 @@ import { UploadButton } from "./upload-button";
 import { DownloadButton } from "./download-button";
 import { FilteredImage } from "./filtered-image";
 import { SlidersWrap } from "./sliders-wrap";
+import { IFilterData } from "./IFilterData";
+
+const initialData: IFilterData = {
+  blurValue: 0,
+  hueValue: 0,
+  contrastValue: 100,
+  grayscaleValue: 0,
+  invertValue: 0,
+  brightnessValue: 100,
+  saturateValue: 100
+}
 
 export class App extends Wrap {
   constructor(parent:HTMLElement, className: string) {
@@ -13,7 +24,7 @@ export class App extends Wrap {
     const settingWrap = new Wrap(this.el, 'setting-wrap');
     const settingLayout = new Wrap(settingWrap.el, 'setting-disabled');
 
-    const slidersWrap = new SlidersWrap(settingWrap.el)
+    const slidersWrap = new SlidersWrap(settingWrap.el, initialData);
     const resetButton = new ResetButton(settingWrap.el, 'Reset to default');
     
     const imageAreaWrap = new Wrap(this.el, 'image-area-wrap');
@@ -24,14 +35,12 @@ export class App extends Wrap {
     const image = new Img(imageAreaWrap.el);
     
     resetButton.resetFilter = () => {
+      image.setFilter(initialData);
       slidersWrap.resetValues();
-      image.resetFilter();
-      image.setFilter();
     }
 
-    slidersWrap.onInputs = (values, contents) => {
-      image.setValues(values, contents);
-      image.setFilter();
+    slidersWrap.onInputs = (data) => {
+      image.setFilter(data);
     }
 
     uploadSender.transmitClick = () => {
@@ -46,7 +55,7 @@ export class App extends Wrap {
         }
       const filteredImage = new FilteredImage(img);
       downloadBtn.downloadImg = () => {
-          filteredImage.context.filter = image.setFilter();
+          filteredImage.context.filter = image.setFilter(slidersWrap.data);
           filteredImage.context.drawImage(img, 0, 0, filteredImage.canvas.width, filteredImage.canvas.height);
           const link = document.createElement('a');
           link.download = uploadBtn.el.files[0].name;

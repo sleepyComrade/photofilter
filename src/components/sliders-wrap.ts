@@ -1,31 +1,63 @@
 import { SliderItem } from "./slider-item";
+import { IFilterData } from "./IFilterData";
 
 export class SlidersWrap {
-  el
-  blurSlider
-  hueSlider
-  contrastSlider
-  grayscaleSlider
-  invertSlider
-  brightnessSlider
-  saturateSlider
-  onInputs: (values: number, contents: string) => void;
-  constructor(parent: HTMLElement) {
-    this.el = document.createElement('div');
-    this.el.className = 'sliders-wrap';
+  el;
+  blurSlider;
+  hueSlider;
+  contrastSlider;
+  grayscaleSlider;
+  invertSlider;
+  brightnessSlider;
+  saturateSlider;
+  data: IFilterData;
+  initial: IFilterData;
+  onInputs: (data: IFilterData) => void;
+  constructor(parent: HTMLElement, initialData: IFilterData) {
+    this.el = document.createElement("div");
+    this.el.className = "sliders-wrap";
     parent.append(this.el);
+    this.initial = initialData;
+    this.data = JSON.parse(JSON.stringify(this.initial));
 
-    this.blurSlider = new SliderItem(this.el, 'Blur', '0', '100');
-    this.hueSlider = new SliderItem(this.el, 'Hue', '0', '360');
-    this.contrastSlider = new SliderItem(this.el, 'Contrast', '100', '200');
-    this.grayscaleSlider = new SliderItem(this.el, 'Grayscale', '0', '100');
-    this.invertSlider = new SliderItem(this.el, 'Invert', '0', '100');
-    this.brightnessSlider = new SliderItem(this.el, 'Brightness', '100', '200');
-    this.saturateSlider = new SliderItem(this.el, 'Saturate', '100', '200');
-    this.transmitValue();
+    this.blurSlider = new SliderItem(this.el, "Blur", initialData.blurValue + '', "100");
+    this.hueSlider = new SliderItem(this.el, "Hue", initialData.hueValue + '', "360");
+    this.contrastSlider = new SliderItem(this.el, "Contrast", initialData.contrastValue + '', "200");
+    this.grayscaleSlider = new SliderItem(this.el, "Grayscale", initialData.grayscaleValue + '', "100");
+    this.invertSlider = new SliderItem(this.el, "Invert", initialData.invertValue + '', "100");
+    this.brightnessSlider = new SliderItem(this.el, "Brightness", initialData.brightnessValue + '', "200");
+    this.saturateSlider = new SliderItem(this.el, "Saturate", initialData.saturateValue + '', "200");
+    this.blurSlider.onInput = (value) => {
+      this.data.blurValue = value;
+      this.onInputs(this.data);
+    };
+    this.hueSlider.onInput = (value) => {
+      this.data.hueValue = value;
+      this.onInputs(this.data);
+    };
+    this.contrastSlider.onInput = (value) => {
+      this.data.contrastValue = value;
+      this.onInputs(this.data);
+    };
+    this.grayscaleSlider.onInput = (value) => {
+      this.data.grayscaleValue = value;
+      this.onInputs(this.data);
+    };
+    this.invertSlider.onInput = (value) => {
+      this.data.invertValue = value;
+      this.onInputs(this.data);
+    };
+    this.brightnessSlider.onInput = (value) => {
+      this.data.brightnessValue = value;
+      this.onInputs(this.data);
+    };
+    this.saturateSlider.onInput = (value) => {
+      this.data.saturateValue = value;
+      this.onInputs(this.data);
+    };
   }
 
-  resetValues () {
+  resetValues() {
     this.blurSlider.resetValue();
     this.hueSlider.resetValue();
     this.contrastSlider.resetValue();
@@ -33,29 +65,6 @@ export class SlidersWrap {
     this.invertSlider.resetValue();
     this.brightnessSlider.resetValue();
     this.saturateSlider.resetValue();
-  }
-
-  transmitValue () {
-    this.blurSlider.onInput = (value, content) => {
-        this.onInputs(value, content);
-    }
-    this.hueSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
-    this.contrastSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
-    this.grayscaleSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
-    this.invertSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
-    this.brightnessSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
-    this.saturateSlider.onInput = (value, content) => {
-      this.onInputs(value, content);
-    }
+    this.data = JSON.parse(JSON.stringify(this.initial));
   }
 }

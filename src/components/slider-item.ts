@@ -3,7 +3,7 @@ export class SliderItem {
   name
   slider
   defaultValue
-  onInput: (value: number, content: string) => void;
+  onInput: (value: number) => void;
   constructor(parent:HTMLElement, content: string, val: string, max: string) {
     this.el = document.createElement('div');
     this.el.className = 'slider-wrap';
@@ -24,7 +24,7 @@ export class SliderItem {
     this.el.append(this.slider);
     this.slider.oninput = () => {
       const value = +(this.slider.value);
-      this.onInput(value, content);
+      this.onInput(value);
     };
   }
 

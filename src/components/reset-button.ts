@@ -10,6 +10,6 @@ export class ResetButton extends Button {
   }
 
   getClick() {
-    this.el.click();
+    this.el.click();    
   }
 }
